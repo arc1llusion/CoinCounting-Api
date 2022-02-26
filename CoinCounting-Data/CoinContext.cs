@@ -16,6 +16,7 @@ namespace CoinCounting.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<CoinDeposit> CoinDeposits { get; set; }
 #nullable restore
     }
 }
