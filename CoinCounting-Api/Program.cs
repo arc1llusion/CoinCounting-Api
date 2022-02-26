@@ -1,3 +1,6 @@
+using CoinCounting.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<CoinContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"), x =>
+    {
+        x.MigrationsAssembly("CoinCounting-Data");
+    });
+});
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+//builder.Services.
+//DbInitializer.Initialize()
 
 var app = builder.Build();
 
@@ -21,5 +36,4 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();
