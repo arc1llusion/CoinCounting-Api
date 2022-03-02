@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoinCounting_Api.Controllers
+namespace CoinCounting_Api2.Controllers
 {
     [ApiController]
     [Route("[controller]")]

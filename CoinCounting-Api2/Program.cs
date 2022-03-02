@@ -19,21 +19,20 @@ builder.Services.AddDbContext<CoinContext>(options =>
 });
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-//builder.Services.
-//DbInitializer.Initialize()
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 app.Run();

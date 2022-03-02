@@ -1,4 +1,4 @@
-namespace CoinCounting_Api
+namespace CoinCounting_Api2
 {
     public class WeatherForecast
     {

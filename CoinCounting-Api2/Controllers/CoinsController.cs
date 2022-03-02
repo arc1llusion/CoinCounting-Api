@@ -21,17 +21,17 @@ namespace CoinCounting_Api.Controllers
         public async Task<ActionResult<IEnumerable<CoinDepositDto>>> GetDeposits(int userId)
         {
             var deposits = await (from cd in _context.CoinDeposits
-                           where cd.UserId == userId
-                           select new CoinDepositDto()
-                           {
-                               Id = cd.Id,
-                               UserId = cd.UserId,
-                               UserName = cd.User.UserName,
-                               Dimes = cd.Dimes,
-                               Nickels = cd.Nickels,
-                               Pennies = cd.Pennies,
-                               Quarters = cd.Quarters
-                           }).ToArrayAsync();
+                                  where cd.UserId == userId
+                                  select new CoinDepositDto()
+                                  {
+                                      Id = cd.Id,
+                                      UserId = cd.UserId,
+                                      UserName = cd.User.UserName,
+                                      Dimes = cd.Dimes,
+                                      Nickels = cd.Nickels,
+                                      Pennies = cd.Pennies,
+                                      Quarters = cd.Quarters
+                                  }).ToArrayAsync();
 
             return Ok(deposits);
         }
