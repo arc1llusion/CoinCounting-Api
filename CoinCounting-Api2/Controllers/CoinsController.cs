@@ -30,7 +30,8 @@ namespace CoinCounting_Api.Controllers
                                       Dimes = cd.Dimes,
                                       Nickels = cd.Nickels,
                                       Pennies = cd.Pennies,
-                                      Quarters = cd.Quarters
+                                      Quarters = cd.Quarters,
+                                      DateDeposited = cd.DateDesposited
                                   }).ToArrayAsync();
 
             return Ok(deposits);
@@ -50,7 +51,8 @@ namespace CoinCounting_Api.Controllers
                 Pennies = dto.Pennies,
                 Nickels = dto.Nickels,
                 Dimes = dto.Dimes,
-                Quarters = dto.Quarters
+                Quarters = dto.Quarters,
+                DateDesposited = DateTimeOffset.UtcNow
             });
 
             await _context.SaveChangesAsync();

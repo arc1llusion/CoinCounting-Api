@@ -9,5 +9,6 @@
         public int Nickels { get; set; } = 0;
         public int Dimes { get; set; } = 0;
         public int Quarters { get; set; } = 0;
+        public DateTimeOffset DateDeposited { get; set; }
     }
 }

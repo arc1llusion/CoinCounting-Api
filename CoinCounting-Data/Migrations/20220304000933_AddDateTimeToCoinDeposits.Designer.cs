@@ -4,6 +4,7 @@ using CoinCounting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoinCounting_Data.Migrations
 {
     [DbContext(typeof(CoinContext))]
-    partial class CoinContextModelSnapshot : ModelSnapshot
+    [Migration("20220304000933_AddDateTimeToCoinDeposits")]
+    partial class AddDateTimeToCoinDeposits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
