@@ -1,4 +1,5 @@
 ﻿using CoinCounting.Data;
+using CoinCounting_Api2.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,11 +11,13 @@ namespace CoinCounting_Api.Controllers
     {
         private readonly ILogger<CoinsController> _logger;
         private readonly CoinContext _context;
+        private readonly DepositNotificationManager _depositNotificationManager;
 
-        public CoinsController(ILogger<CoinsController> logger, CoinContext context)
+        public CoinsController(ILogger<CoinsController> logger, CoinContext context, DepositNotificationManager depositNotificationManager)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _depositNotificationManager = depositNotificationManager ?? throw new ArgumentNullException(nameof(depositNotificationManager));
         }
 
         [HttpGet("GetDeposits")]
@@ -38,9 +41,9 @@ namespace CoinCounting_Api.Controllers
         }
 
         [HttpPost("Deposit")]
-        public async Task<ActionResult> Deposit(CoinDepositDto dto)
+        public async Task<ActionResult> Deposit(CoinDepositDto dto, CancellationToken token = default)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == dto.UserId);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == dto.UserId, token);
 
             if (user == null)
                 return NotFound("User not found");
@@ -53,9 +56,13 @@ namespace CoinCounting_Api.Controllers
                 Dimes = dto.Dimes,
                 Quarters = dto.Quarters,
                 DateDesposited = DateTimeOffset.UtcNow
-            });
+            }, token);
 
-            await _context.SaveChangesAsync();
+            _logger.LogInformation("Deposit Made");
+
+            await _depositNotificationManager.BroadCast(dto, token);
+
+            await _context.SaveChangesAsync(token);
 
             return Ok();
         }

@@ -1,4 +1,5 @@
 using CoinCounting.Data;
+using CoinCounting_Api2.Hubs;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,7 @@ builder.Services.AddCors(options =>
     {
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
+        policy.AllowCredentials();
         //policy.AllowAnyOrigin();
         policy.SetIsOriginAllowed(origin =>
         {
@@ -43,21 +45,35 @@ builder.Services.AddCors(options =>
     options.DefaultPolicyName = "ControllerPolicy";
 });
 
+builder.Services.AddSignalR().AddJsonProtocol(options =>
+{
+    options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+});
+
+builder.Services.AddScoped<DepositNotificationManager>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 
 app.UseCors();
 
 app.UseHttpsRedirection();
 
+app.MapControllers();
+
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<DepositHub>("/Hubs/DepositHub");
+});
 
 app.Run();
