@@ -33,7 +33,7 @@ builder.Services.AddCors(options =>
             if (origin.ToLower().StartsWith("http://localhost"))
                 return true;
 
-            if (origin.ToLower().StartsWith("http://coincounting-app.azurewebsites.net"))
+            if (origin.ToLower().StartsWith("http://coincounting-app.azurewebsites.net") || origin.ToLower().StartsWith("https://coincounting-app.azurewebsites.net"))
                 return true;
 
             return false;
