@@ -69,5 +69,16 @@ namespace CoinCounting_Api.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("ClearCoinDeposits")]
+        public async Task<ActionResult> ClearCoinDeposits(int userId)
+        {
+            var deposits = await _context.CoinDeposits.Where(x => x.UserId == userId).ToArrayAsync();
+
+            _context.CoinDeposits.RemoveRange(deposits);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
