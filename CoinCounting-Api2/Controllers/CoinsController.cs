@@ -48,6 +48,7 @@ namespace CoinCounting_Api.Controllers
             if (user == null)
                 return NotFound("User not found");
 
+            var now = DateTimeOffset.UtcNow;
             await _context.CoinDeposits.AddAsync(new CoinDeposit()
             {
                 UserId = dto.UserId,
@@ -55,10 +56,12 @@ namespace CoinCounting_Api.Controllers
                 Nickels = dto.Nickels,
                 Dimes = dto.Dimes,
                 Quarters = dto.Quarters,
-                DateDesposited = DateTimeOffset.UtcNow
+                DateDesposited = now
             }, token);
 
             _logger.LogInformation("Deposit Made");
+
+            dto.DateDeposited = now;
 
             await _depositNotificationManager.BroadCast(dto, token);
 
