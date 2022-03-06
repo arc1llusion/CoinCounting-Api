@@ -9,6 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
     .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
 
+builder.Services.AddRazorPages((configure) =>
+{
+
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -73,6 +78,8 @@ app.MapControllers();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.UseEndpoints(endpoints =>
 {

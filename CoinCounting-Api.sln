@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinCounting-Data", "CoinCounting-Data\CoinCounting-Data.csproj", "{1109303B-EF9A-4BC1-A5EA-DC9027A35EE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinCounting-Api2", "CoinCounting-Api2\CoinCounting-Api2.csproj", "{3B11E368-09DB-49E1-8BC2-FBC54DF7EDAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinCounting-Api2", "CoinCounting-Api2\CoinCounting-Api2.csproj", "{3B11E368-09DB-49E1-8BC2-FBC54DF7EDAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
