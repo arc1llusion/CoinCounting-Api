@@ -38,6 +38,9 @@ builder.Services.AddCors(options =>
             if (origin.ToLower().StartsWith("http://coincounting-app.azurewebsites.net") || origin.ToLower().StartsWith("https://coincounting-app.azurewebsites.net"))
                 return true;
 
+            if (origin.ToLower().StartsWith("https://app.pandastic.net"))
+                return true;
+
             return false;
         });
     });
